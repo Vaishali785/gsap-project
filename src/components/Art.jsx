@@ -6,7 +6,7 @@ import gsap from "gsap"
 const Art = () => {
 	const isMobile = useMediaQuery({ maxWidth: 767 })
 	useGSAP(() => {
-		const start = isMobile ? "top 30%" : "top top"
+		const start = isMobile ? "top 40%" : "top top"
 		const maskTimeline = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#art",
