@@ -90,8 +90,8 @@ const Hero = () => {
 							<div className="hidden lg:block">
 								<p className="subtitle ">
 									Every cocktail on our menu is a blend of premium ingredients,
-									creative flair, and timeless recipes - designed to delight
-									your senses.
+									creative flair, and timeless recipes-designed to delight your
+									senses.
 								</p>
 								<a href="#cocktails">View Cocktails</a>
 							</div>
