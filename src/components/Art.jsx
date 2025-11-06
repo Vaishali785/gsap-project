@@ -1,7 +1,7 @@
-import { useMediaQuery } from "react-responsive"
-import { featureLists, goodLists } from "../../constants"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { useMediaQuery } from "react-responsive"
+import { featureLists, goodLists } from "../../constants"
 
 const Art = () => {
 	const isMobile = useMediaQuery({ maxWidth: 767 })
@@ -43,7 +43,7 @@ const Art = () => {
 				<div className="content">
 					<ul className="space-y-4 will-fade">
 						{goodLists.map((feature, index) => (
-							<li className="flex items-center gap-2">
+							<li className="flex items-center gap-2" key={index}>
 								<img src="/images/check.png" alt="check" />
 								<p>{feature}</p>
 							</li>
@@ -60,7 +60,7 @@ const Art = () => {
 
 					<ul className="space-y-4 will-fade">
 						{featureLists.map((feature, index) => (
-							<li className="flex items-center justify-start gap-2">
+							<li className="flex items-center justify-start gap-2" key={index}>
 								<img src="/images/check.png" alt="check" />
 								<p className="md:w-fit w-60">{feature}</p>
 							</li>
