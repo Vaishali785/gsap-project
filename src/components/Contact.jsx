@@ -1,48 +1,50 @@
 import { useGSAP } from "@gsap/react"
-import { openingHours, socials } from "../../constants"
-import { SplitText } from "gsap/all"
 import gsap from "gsap"
+import { SplitText } from "gsap/all"
+import { openingHours, socials } from "../../constants"
 
 const Contact = () => {
 	useGSAP(() => {
-		const titleSplit = SplitText.create("#contact h2", { type: "words" })
-		const timeline = gsap.timeline({
-			scrollTrigger: {
-				trigger: "#contact",
-				start: "top center",
-			},
-			ease: "power1.inOut",
-		})
+		document.fonts.ready.then(() => {
+			const titleSplit = SplitText.create("#contact h2", { type: "words" })
+			const timeline = gsap.timeline({
+				scrollTrigger: {
+					trigger: "#contact",
+					start: "top center",
+				},
+				ease: "power1.inOut",
+			})
 
-		timeline
-			.from(titleSplit.words, {
-				opacity: 0,
-				yPercent: 100,
-				stagger: 0.02,
-			})
-			.from("#contact h3, #contact p", {
-				opacity: 0,
-				yPercent: 100,
-				stagger: 0.02,
-			})
-			.to(
-				"#f-right-leaf",
-				{
-					duration: 1,
-					y: "-50",
-					ease: "power1.inOut",
-				},
-				"<"
-			)
-			.to(
-				"#f-left-leaf",
-				{
-					duration: 1,
-					y: "-50",
-					ease: "power1.inOut",
-				},
-				"<"
-			)
+			timeline
+				.from(titleSplit.words, {
+					opacity: 0,
+					yPercent: 100,
+					stagger: 0.02,
+				})
+				.from("#contact h3, #contact p", {
+					opacity: 0,
+					yPercent: 100,
+					stagger: 0.02,
+				})
+				.to(
+					"#f-right-leaf",
+					{
+						duration: 1,
+						y: "-50",
+						ease: "power1.inOut",
+					},
+					"<"
+				)
+				.to(
+					"#f-left-leaf",
+					{
+						duration: 1,
+						y: "-50",
+						ease: "power1.inOut",
+					},
+					"<"
+				)
+		})
 	}, [])
 	return (
 		<footer id="contact">

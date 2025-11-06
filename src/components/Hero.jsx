@@ -8,59 +8,61 @@ const Hero = () => {
 	const videoRef = useRef(null)
 	const isMobile = useMediaQuery({ maxWidth: 767 })
 	useGSAP(() => {
-		const heroTextSplit = new SplitText(".title", { type: "chars,words" })
-		const heroParaSplit = new SplitText(".subtitle", { type: "lines" })
+		document.fonts.ready.then(() => {
+			const heroTextSplit = new SplitText(".title", { type: "chars,words" })
+			const heroParaSplit = new SplitText(".subtitle", { type: "lines" })
 
-		heroTextSplit.chars.forEach((char) => char.classList.add("text-gradient"))
+			heroTextSplit.chars.forEach((char) => char.classList.add("text-gradient"))
 
-		gsap.from(heroTextSplit.chars, {
-			yPercent: "100",
-			duration: 1.8,
-			ease: "expo.out",
-			stagger: 0.05,
-		})
-		gsap.from(heroParaSplit.lines, {
-			opacity: 0,
-			yPercent: 100,
-			duration: 1.8,
-			delay: 1,
-			stagger: 0.06,
-			ease: "expo.out",
-		})
+			gsap.from(heroTextSplit.chars, {
+				yPercent: "100",
+				duration: 1.8,
+				ease: "expo.out",
+				stagger: 0.05,
+			})
+			gsap.from(heroParaSplit.lines, {
+				opacity: 0,
+				yPercent: 100,
+				duration: 1.8,
+				delay: 1,
+				stagger: 0.06,
+				ease: "expo.out",
+			})
 
-		gsap
-			.timeline({
+			gsap
+				.timeline({
+					scrollTrigger: {
+						trigger: "#hero",
+						start: "center top",
+						end: "bottom top",
+						scrub: true,
+					},
+				})
+				.to(".right-leaf", { y: 200 }, 0)
+				.to(".left-leaf", { y: -200 }, 0)
+
+			const startValue = isMobile ? "top 50%" : "center 60%"
+			const endValue = isMobile ? "120% top" : "bottom top"
+
+			const videoTimeline = gsap.timeline({
 				scrollTrigger: {
-					trigger: "#hero",
-					start: "center top",
-					end: "bottom top",
+					trigger: "video",
+					start: startValue,
+					end: endValue,
 					scrub: true,
+					pin: true,
 				},
 			})
-			.to(".right-leaf", { y: 200 }, 0)
-			.to(".left-leaf", { y: -200 }, 0)
 
-		const startValue = isMobile ? "top 50%" : "center 60%"
-		const endValue = isMobile ? "120% top" : "bottom top"
-
-		const videoTimeline = gsap.timeline({
-			scrollTrigger: {
-				trigger: "video",
-				start: startValue,
-				end: endValue,
-				scrub: true,
-				pin: true,
-			},
-		})
-
-		if (videoRef.current) {
-			videoRef.current.onloadedmetadata = () => {
-				if (!videoRef.current) return
-				videoTimeline.to(videoRef.current, {
-					currentTime: videoRef.current.duration,
-				})
+			if (videoRef.current) {
+				videoRef.current.onloadedmetadata = () => {
+					if (!videoRef.current) return
+					videoTimeline.to(videoRef.current, {
+						currentTime: videoRef.current.duration,
+					})
+				}
 			}
-		}
+		})
 	}, [])
 	return (
 		<>
